@@ -89,7 +89,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             ComposableTheme {
                 App()
-                LoginForm()
             }
         }
     }
@@ -223,11 +222,10 @@ fun SearchBarSample() {
     }
 
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
 fun LoginForm() {
     var nome by remember { mutableStateOf("") }
     var telefone by remember { mutableStateOf("") }
-    var origem by remember { mutableStateOf("") }
-    var data by remember { mutableStateOf("") }
     var observacao by remember { mutableStateOf("") }
 
     Column(
@@ -240,27 +238,22 @@ fun LoginForm() {
         OutlinedTextField(
             value = nome,
             onValueChange = { nome = it },
-            label = { Text(text = "Nome") },
-            keyboardOptions = KeyboardOptions.Default.copy(
-                imeAction = ImeAction.Next,
-                keyboardType = KeyboardType.Text
-            ),
+            label = { Text("Nome") },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(bottom = 16.dp)
         )
 
         OutlinedTextField(
             value = telefone,
             onValueChange = { telefone = it },
-            label = { Text(text = "Telefone") },
-            keyboardOptions = KeyboardOptions.Default.copy(
-                imeAction = ImeAction.Done,
-                keyboardType = KeyboardType.Phone
-            ),
+            label = { Text("Telefone") },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(bottom = 16.dp),
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Number
+            )
         )
         EditableExposedDropdownMenuSample()
 
